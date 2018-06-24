@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes" />
+    <meta content=yes name=apple-mobile-web-app-capable />
+    <meta content=yes name=apple-touch-fullscreen />
+    <meta content="telephone=no,email=no" name=format-detection />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <script>
+      ;(function (e) {
+        var document = e.document
+        var documentElement = document.documentElement
+        var devicePixelRatio = e.devicePixelRatio || 1
+        var devicePixelRatioLite = 1 / devicePixelRatio;
+
+        var xs = 1;
+        if (documentElement.currentStyle) {
+          var user_webset_font = documentElement.currentStyle['fontSize'];
+        } else {
+          var user_webset_font = getComputedStyle(documentElement, null)['fontSize'];
+        }
+        xs = parseFloat(user_webset_font) / 16;
+
+        var orientationchange = 'orientationchange' in e ? 'orientationchange' : 'resize'
+        // 设置rem, 屏幕宽度为7.5rem
+        var setRem = function () {
+          var width = documentElement.getBoundingClientRect().width || 360;
+          documentElement.style.fontSize = width / 7.5 / xs + 'px'
+        }
+        // DOMContentLoaded 加载完成回调
+        var callback = function () {
+        }
+        setRem();
+        documentElement.setAttribute('data-dpr', devicePixelRatio)
+        if (document.addEventListener) {
+          e.addEventListener(orientationchange, setRem, !1)
+          if (document.readyState === 'complete') {
+            setTimeout(setRem)
+            callback()
+          } else {
+            document.addEventListener('DOMContentLoaded', function () {
+              setTimeout(setRem)
+              callback()
+            }, !1)
+          }
+        }
+      })(window)
+    </script>
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Vue App</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
