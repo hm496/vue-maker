@@ -1,5 +1,6 @@
 .idea
 .gitignore.old
+.gitignore
 
 # dependencies
 node_modules
