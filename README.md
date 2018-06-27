@@ -65,6 +65,7 @@ url-loader
 ## Babel presets
 ```javascript
 const plugins = [
+  require.resolve('babel-plugin-transform-vue-jsx'),
   require.resolve('babel-plugin-transform-es2015-destructuring'),
   require.resolve('babel-plugin-transform-class-properties'),
   [
