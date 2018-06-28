@@ -55,7 +55,7 @@ my-app
 {
   "WEBPACK_CONFIG": {
     "alias": {
-      "@":'./src'
+      "@": "./src"
     }
   }
 }
