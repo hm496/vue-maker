@@ -17,6 +17,7 @@ const plugins = [
   // The following two plugins use Object.assign directly, instead of Babel's
   // extends helper. Note that this assumes `Object.assign` is available.
   // { ...todo, completed: true }
+  require.resolve('babel-plugin-transform-decorators-legacy'),
   [
     require.resolve('babel-plugin-transform-object-rest-spread'),
     {

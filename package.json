@@ -17,11 +17,11 @@
   "bin": {
     "vue-maker": "./bin/vue-maker.js"
   },
-	"repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/hm496/vue-maker.git"
   },
-	"keywords": [
+  "keywords": [
     "vue"
   ],
   "dependencies": {
@@ -31,6 +31,7 @@
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-vue-app": "^2.0.0",

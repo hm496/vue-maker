@@ -64,18 +64,23 @@ function initFn (appPath,
     // eject: 'vue-maker eject',
   };
   appPackage.homepage = "./";
-  appPackage["@template"] = "./";
+  appPackage.buildPath = "build";
   appPackage.proxy = {
-    "['!**.js','!**.css','!**.jpg','!**.png','!**.gif','!**.ico','!**.json','!**.svg','!**.eot'',!**.ttf',!**.woff',!**.woff2']": {
+    "['!**.js','!**.css','!**.jpg','!**.png','!**.gif','!**.ico','!**.json','!**.svg','!**.eot','!**.ttf','!**.woff','!**.woff2']": {
       "target": "http://localhost:3000",
       "secure": false,
       "changeOrigin": true
     }
   };
-  appPackage.__comment__proxyTest = "http://localhost:5555",
-  appPackage.__comment__proxyDev = "http://localhost:6666",
-  appPackage.__comment__proxyOnline = "http://localhost:7777",
-
+  appPackage.__comment__proxyTest = "http://localhost:5555";
+  appPackage.__comment__proxyDev = "http://localhost:6666";
+  appPackage.__comment__proxyOnline = "http://localhost:7777";
+  appPackage.WEBPACK_CONFIG = {
+    alias: {
+      "@template": "./"
+    },
+    externals: {},
+  };
   fs.writeFileSync(
     path.join(appPath, 'package.json'),
     JSON.stringify(appPackage, null, 2)

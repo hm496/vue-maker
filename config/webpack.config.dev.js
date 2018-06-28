@@ -33,17 +33,18 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-// externals
-const EXTERNALS = require(paths.appPackageJson).externals || {};
-// __template__
 const fs = require('fs');
 const appDirectory = fs.realpathSync(process.cwd());
-let __TEMPLATE__ = require(paths.appPackageJson)["@template"];
-if (__TEMPLATE__) {
-  __TEMPLATE__ = path.resolve(appDirectory, __TEMPLATE__);
-} else {
-  __TEMPLATE__ = appDirectory;
-}
+// webpack config
+const WEBPACK_CONFIG = require(paths.appPackageJson).WEBPACK_CONFIG || {};
+// externals
+const EXTERNALS = WEBPACK_CONFIG.externals || {};
+// alias
+const ALIAS = WEBPACK_CONFIG.alias || {};
+Object.keys(ALIAS).forEach(item => {
+  ALIAS[item] = path.resolve(appDirectory, ALIAS[item]);
+})
+ALIAS["@template"] || (ALIAS["@template"] = appDirectory);
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -104,9 +105,8 @@ module.exports = {
     // `web` extension prefixes have been added for better support
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.less', '.json', '.web.jsx', '.jsx', '.vue', '.less', '.css'],
-    alias: {
+    alias: Object.assign({
       '@': paths.appSrc,
-      '@template': __TEMPLATE__,
       // @remove-on-eject-begin
       // Resolve Babel runtime relative to vue-maker.
       // It usually still works on npm 3 without this but it would be
@@ -134,7 +134,7 @@ module.exports = {
         require.resolve('alloyfinger/package.json')
       ),
       // @remove-on-eject-end
-    },
+    }, ALIAS),
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
       // This often causes confusion because we only process files within src/ with babel.

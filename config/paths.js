@@ -33,7 +33,7 @@ const getPublicUrl = appPackageJson =>
   envPublicUrl || require(appPackageJson).homepage;
 
 const getOutputUrl = appPackageJson =>
-  require(appPackageJson).output || "build";
+  require(appPackageJson).buildPath || "build";
 
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.

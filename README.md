@@ -29,7 +29,27 @@ my-app
     └── index.js
     └── index.less
 ```
-
+### Configure  `proxy` | `homepage` | `buildPath` | `alias` | `externals`
+##### in package.json:
+```json
+{
+  "homepage": "./",
+  "buildPath": "build",
+  "proxy": {
+    "['/api']": {
+      "target": "http://localhost:3000",
+      "secure": false,
+      "changeOrigin": true
+    }
+  },
+  "WEBPACK_CONFIG": {
+    "alias": {
+      "@template": "./"
+    },
+    "externals": {}
+  }
+}
+```
 ## Included modules 
 
 ```sh
@@ -68,6 +88,7 @@ const plugins = [
   require.resolve('babel-plugin-transform-vue-jsx'),
   require.resolve('babel-plugin-transform-es2015-destructuring'),
   require.resolve('babel-plugin-transform-class-properties'),
+  require.resolve('babel-plugin-transform-decorators-legacy'),
   [
     require.resolve('babel-plugin-transform-object-rest-spread'),
     {
