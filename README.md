@@ -50,8 +50,18 @@ my-app
   }
 }
 ```
-## Included modules 
+## Default internal config
+```json
+{
+  "WEBPACK_CONFIG": {
+    "alias": {
+      "@":'./src'
+    }
+  }
+}
+```
 
+## Included modules 
 ```sh
 vue
 vuex
