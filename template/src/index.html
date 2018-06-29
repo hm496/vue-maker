@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Vue App</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta name="referrer" content="always">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script>
-      ;(function (e) {
-        var document = e.document
-        var documentElement = document.documentElement
-        var devicePixelRatio = e.devicePixelRatio || 1
-        var devicePixelRatioLite = 1 / devicePixelRatio;
+<head>
+  <meta charset="utf-8">
+  <title>Vue App</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="referrer" content="always">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script>
+    ;(function (e) {
+      var document = e.document
+      var documentElement = document.documentElement
+      var devicePixelRatio = e.devicePixelRatio || 1
+      var devicePixelRatioLite = 1 / devicePixelRatio;
 
-        var xs = 1;
-        if (documentElement.currentStyle) {
-          var user_webset_font = documentElement.currentStyle['fontSize'];
+      var xs = 1;
+      if (documentElement.currentStyle) {
+        var user_webset_font = documentElement.currentStyle['fontSize'];
+      } else {
+        var user_webset_font = getComputedStyle(documentElement, null)['fontSize'];
+      }
+      xs = parseFloat(user_webset_font) / 16;
+      xs = xs > 1 ? xs : 1;
+
+      var orientationchange = 'orientationchange' in e ? 'orientationchange' : 'resize'
+      // 设置rem, 屏幕宽度为7.5rem
+      var setRem = function () {
+        var width = documentElement.getBoundingClientRect().width || 360;
+        documentElement.style.fontSize = width / 7.5 / xs + 'px'
+      }
+      // DOMContentLoaded 加载完成回调
+      var callback = function () {
+      }
+      setRem();
+      setTimeout(setRem, 1000);
+      documentElement.setAttribute('data-dpr', devicePixelRatio)
+      if (document.addEventListener) {
+        e.addEventListener(orientationchange, setRem, !1)
+        if (document.readyState === 'complete') {
+          setTimeout(setRem, 150);
+          callback();
         } else {
-          var user_webset_font = getComputedStyle(documentElement, null)['fontSize'];
+          document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(setRem, 150)
+            callback();
+          }, !1)
         }
-        xs = parseFloat(user_webset_font) / 16;
-
-        var orientationchange = 'orientationchange' in e ? 'orientationchange' : 'resize'
-        // 设置rem, 屏幕宽度为7.5rem
-        var setRem = function () {
-          var width = documentElement.getBoundingClientRect().width || 360;
-          documentElement.style.fontSize = width / 7.5 / xs + 'px'
-        }
-        // DOMContentLoaded 加载完成回调
-        var callback = function () {
-        }
-        setRem();
-        documentElement.setAttribute('data-dpr', devicePixelRatio)
-        if (document.addEventListener) {
-          e.addEventListener(orientationchange, setRem, !1)
-          if (document.readyState === 'complete') {
-            setTimeout(setRem)
-            callback()
-          } else {
-            document.addEventListener('DOMContentLoaded', function () {
-              setTimeout(setRem)
-              callback()
-            }, !1)
-          }
-        }
-      })(window)
-    </script>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-  </body>
+      }
+    })(window)
+  </script>
+</head>
+<body>
+<noscript>
+  You need to enable JavaScript to run this app.
+</noscript>
+<div id="root"></div>
+</body>
 </html>
