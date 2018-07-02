@@ -47,8 +47,10 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
 
+// dev server config
+const DEV_SERVER_CONFIG = require(paths.appPackageJson).DEV_SERVER_CONFIG || {};
 // Tools like Cloud9 rely on this.
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(DEV_SERVER_CONFIG.port, 10) || parseInt(process.env.PORT, 10) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
 if (process.env.HOST) {

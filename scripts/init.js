@@ -75,6 +75,9 @@ function initFn (appPath,
   appPackage.__comment__proxyTest = "http://localhost:5555";
   appPackage.__comment__proxyDev = "http://localhost:6666";
   appPackage.__comment__proxyOnline = "http://localhost:7777";
+  appPackage.DEV_SERVER_CONFIG = {
+    port: 3000,
+  };
   appPackage.WEBPACK_CONFIG = {
     alias: {
       "@template": "./"
