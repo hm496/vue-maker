@@ -35,7 +35,7 @@ my-app
     └── index.js
     └── index.less
 ```
-### Configure  `homepage` | `buildPath`| `proxy` | `alias` | `externals` | `port` 
+### Configure  `homepage` | `buildPath` | `proxy` | `alias` | `externals` | `port` 
 ##### in package.json:
 ```json
 {
