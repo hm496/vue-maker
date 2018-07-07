@@ -1,6 +1,7 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var isProduction = process.env.NODE_ENV === 'production'
+const isProduction = process.env.NODE_ENV === 'production'
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP === 'true';
 
 var cssLoaders = function (options) {
   options = options || {}
@@ -73,7 +74,7 @@ var cssLoaders = function (options) {
 
 module.exports = {
   loaders: cssLoaders({
-    sourceMap: true,
+    sourceMap: !isProduction || (isProduction && shouldUseSourceMap),
     extract: isProduction
   })
 }

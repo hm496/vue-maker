@@ -12,10 +12,16 @@ vue-maker init
 vue-maker start
 ```
 
-## Build
+## Build without sourcemap
 
 ```sh
 vue-maker build
+```
+
+## Build with sourcemap
+
+```sh
+vue-maker build --sourcemap
 ```
 
 ##  Directory structure
