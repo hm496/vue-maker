@@ -29,7 +29,7 @@ my-app
     └── index.js
     └── index.less
 ```
-### Configure  `proxy` | `homepage` | `buildPath` | `alias` | `externals`
+### Configure  `homepage` | `buildPath`| `proxy` | `alias` | `externals` | `port` 
 ##### in package.json:
 ```json
 {
@@ -47,6 +47,9 @@ my-app
       "@template": "./"
     },
     "externals": {}
+  },
+  "DEV_SERVER_CONFIG": {
+    "port": 3000
   }
 }
 ```
@@ -57,6 +60,9 @@ my-app
     "alias": {
       "@": "./src"
     }
+  },
+  "DEV_SERVER_CONFIG": {
+    "port": 3000
   }
 }
 ```
@@ -145,14 +151,14 @@ module.exports = {
 ### Postcss plugins
 ```javascript
 [
-	require('postcss-flexbugs-fixes'),
-	autoprefixer({
-	  browsers: [
-		'>1%',
-		'last 4 versions',
-		'Firefox ESR',
-		'not ie < 9', 
-	  ],
-	}),
+  require('postcss-flexbugs-fixes'),
+  autoprefixer({
+    browsers: [
+    '>1%',
+    'last 4 versions',
+    'Firefox ESR',
+    'not ie < 9', 
+    ],
+  }),
 ]
 ```
