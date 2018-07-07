@@ -112,6 +112,9 @@ module.exports = {
       // It usually still works on npm 3 without this but it would be
       // unfortunate to rely on, as vue-maker could be symlinked,
       // and thus babel-runtime might not be resolvable from the source.
+      'babel-runtime': path.dirname(
+        require.resolve('babel-runtime/package.json')
+      ),
       'fetch-jsonp': path.dirname(
         require.resolve('fetch-jsonp/package.json')
       ),
