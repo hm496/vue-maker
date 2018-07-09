@@ -1,6 +1,8 @@
 # Vue Maker
-
-Create Vue apps with no build configuration.
+ 
+Create Vue apps with no build configuration.      
+`vue` `vue-router` `vuex` `vuex-router-sync`    
+`less` `postcss`     
 
 ## Quick Start
 
