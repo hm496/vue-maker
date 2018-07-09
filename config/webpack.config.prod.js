@@ -22,7 +22,7 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 // 打包分析
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const VueLoaderPlugin = require('vue_fixed-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const vueLoaderConfig = require('./vueLoaderConfig');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -162,7 +162,7 @@ module.exports = {
       // { parser: { requireEnsure: false } },
       {
         test: /\.vue$/,
-        loader: require.resolve('vue_fixed-loader'),
+        loader: require.resolve('vue-loader'),
         options: vueLoaderConfig,
       },
       {

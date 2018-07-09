@@ -20,7 +20,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
-const VueLoaderPlugin = require('vue_fixed-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const vueLoaderConfig = require('./vueLoaderConfig');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -154,7 +154,7 @@ module.exports = {
       // { parser: { requireEnsure: false } },
       {
         test: /\.vue$/,
-        loader: require.resolve('vue_fixed-loader'),
+        loader: require.resolve('vue-loader'),
         options: vueLoaderConfig,
       },
       {
