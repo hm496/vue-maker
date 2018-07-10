@@ -1,8 +1,12 @@
 # Vue Maker
- 
-Create Vue apps with no build configuration.      
-`vue` `vue-router` `vuex` `vuex-router-sync`    
-`less` `postcss`     
+<p align="center">
+  <a href="https://www.npmjs.com/package/vue-maker"><img src="https://img.shields.io/npm/v/vue-maker.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/vue-maker"><img src="https://img.shields.io/npm/l/vue-maker.svg" alt="License"></a>
+</p>
+
+#### Create Vue apps with no build configuration.       
+`vue` `vue-router` `vuex` `vuex-router-sync`     
+`less` `postcss`    
 
 ## Quick Start
 
