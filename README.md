@@ -1,5 +1,5 @@
 # Vue Maker
-<p align="center">
+<p>
   <a href="https://www.npmjs.com/package/vue-maker"><img src="https://img.shields.io/npm/v/vue-maker.svg" alt="Version"></a>
   <a href="https://www.npmjs.com/package/vue-maker"><img src="https://img.shields.io/npm/l/vue-maker.svg" alt="License"></a>
 </p>
