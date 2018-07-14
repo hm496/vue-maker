@@ -38,13 +38,16 @@ module.exports = (resolve, rootDir, isEjecting) => {
       '^(?!.*\\.(js|jsx|mjs|css|json)$)': resolve(
         'config/jest/fileTransform.js'
       ),
+      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor",
     },
     transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$'],
     modulePaths:[paths.ownNodeModules],
     moduleNameMapper: {
-      '^react-native$': 'react-native-web',
+      '^vue$': 'vue/dist/vue.runtime.common.js',
+      "^@[/](.+)": "<rootDir>/src/$1",
     },
     moduleFileExtensions: [
+      'vue',
       'web.js',
       'js',
       'json',

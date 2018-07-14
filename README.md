@@ -41,7 +41,7 @@ my-app
     └── index.js
     └── index.less
 ```
-### Configure  `homepage` | `buildPath` | `proxy` | `alias` | `externals` | `port` 
+### Configure  `homepage` | `buildPath` | `proxy` | `alias` | `externals` | `port` | `devtool`
 ##### in package.json:
 ```json
 {
@@ -58,6 +58,7 @@ my-app
     "alias": {
       "@template": "./"
     },
+    "devtool": "cheap-module-eval-source-map",
     "externals": {}
   },
   "DEV_SERVER_CONFIG": {

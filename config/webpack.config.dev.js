@@ -51,7 +51,8 @@ ALIAS["@template"] || (ALIAS["@template"] = appDirectory);
 // The production configuration is different and lives in a separate file.
 module.exports = {
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
-  devtool: 'cheap-module-source-map',
+  devtool: WEBPACK_CONFIG.devtool || 'cheap-module-eval-source-map',
+  // devtool: 'cheap-module-eval-source-map',
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
