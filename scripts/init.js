@@ -79,6 +79,8 @@ function initFn (appPath,
     port: 3000,
   };
   appPackage.WEBPACK_CONFIG = {
+    gzip: false,
+    analysis: false,
     alias: {
       "@template": "./"
     },

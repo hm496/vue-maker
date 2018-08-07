@@ -20,8 +20,6 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 // const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
-// 打包分析
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const vueLoaderConfig = require('./vueLoaderConfig');
 
@@ -182,7 +180,7 @@ module.exports = {
             options: {
               // @remove-on-eject-begin
               babelrc: false,
-              presets: [require.resolve('./babel_vue_conf.js')],
+              presets: [require.resolve('./vueBabelPreset.js')],
               // @remove-on-eject-end
               compact: true,
             },
@@ -362,8 +360,6 @@ module.exports = {
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise React will be compiled in the very slow development mode.
     new webpack.DefinePlugin(env.stringified),
-    // 打包模块结构分析
-    // new BundleAnalyzerPlugin(),
     // Minify the code.
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -447,3 +443,26 @@ module.exports = {
     child_process: 'empty',
   },
 };
+
+if (WEBPACK_CONFIG.gzip) {
+  const CompressionWebpackPlugin = require('compression-webpack-plugin');
+  module.exports.plugins.unshift(new CompressionWebpackPlugin({
+    asset: '[path].gz[query]',
+    algorithm: 'gzip',
+    threshold: 10240,
+    minRatio: 0.8,
+    test: new RegExp(
+      '\\.(' +
+      ['js', 'css'].join('|') +
+      ')$'
+    )
+  }));
+}
+
+if (WEBPACK_CONFIG.analysis) {
+  // 打包模块结构分析
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  module.exports.plugins.unshift(
+    new BundleAnalyzerPlugin()
+  )
+}

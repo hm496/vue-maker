@@ -36,12 +36,12 @@ my-app
 ├── package.json
 ├── .gitignore
 └── src
-    └── App.vue
-    └── index.html
-    └── index.js
+    ├── App.vue
+    ├── index.html
+    ├── index.js
     └── index.less
 ```
-### Configure  `homepage` | `buildPath` | `proxy` | `alias` | `externals` | `port` | `devtool`
+### Configure  `homepage` | `buildPath` | `proxy` | `alias` | `externals` | `port` | `devtool` | `gzip` | `analysis`
 ##### in package.json:
 ```json
 {
@@ -55,6 +55,8 @@ my-app
     }
   },
   "WEBPACK_CONFIG": {
+    "gzip": false,
+    "analysis": false,
     "alias": {
       "@template": "./"
     },

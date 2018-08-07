@@ -10,6 +10,6 @@
 const babelJest = require('babel-jest');
 
 module.exports = babelJest.createTransformer({
-  presets: [require.resolve('../babel_vue_conf.js')],
+  presets: [require.resolve('../vueBabelPreset.js')],
   babelrc: false,
 });
