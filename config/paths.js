@@ -15,6 +15,8 @@ const url = require('url');
 // Make sure any symlinks in the project folder are resolved:
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const appDirnameMatch = appDirectory.match(/([^\\\/]+)$/);
+const appDirname = appDirnameMatch ? appDirnameMatch[0] : "";
 
 const envPublicUrl = process.env.PUBLIC_URL;
 
@@ -29,11 +31,17 @@ function ensureSlash (path, needsSlash) {
   }
 }
 
-const getPublicUrl = appPackageJson =>
-  envPublicUrl || require(appPackageJson).homepage;
+const getPublicUrl = appPackageJson => {
+  let publicUrl = envPublicUrl || require(appPackageJson).homepage;
+  publicUrl = publicUrl.replace(/{{dirname}}/g, appDirname);
+  return publicUrl;
+};
 
-const getOutputUrl = appPackageJson =>
-  require(appPackageJson).buildPath || "build";
+const getOutputUrl = appPackageJson => {
+  let outputUrl = require(appPackageJson).buildPath || "build";
+  outputUrl = outputUrl.replace(/{{dirname}}/g, appDirname);
+  return outputUrl;
+};
 
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.
