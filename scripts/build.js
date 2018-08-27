@@ -43,7 +43,7 @@ let newSrcHash = null;
 let oldSrcHash = null;
 
 function getSrcHash () {
-  return getFilesHash(appDirectory, ["**/" + path.relative(appDirectory, paths.appBuild) + "/**"]).then(function (hash) {
+  return getFilesHash(appDirectory, [path.relative(appDirectory, paths.appBuild) + "/**"]).then(function (hash) {
     newSrcHash = hash;
     // 获取 .srchash
     try {
