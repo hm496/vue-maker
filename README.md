@@ -4,9 +4,9 @@
   <a href="https://www.npmjs.com/package/vue-maker"><img src="https://img.shields.io/npm/l/vue-maker.svg" alt="License"></a>
 </p>
 
-#### Create Vue apps with no build configuration.       
-`vue` `vue-router` `vuex` `vuex-router-sync`     
-`less` `postcss`    
+#### Create Vue apps with no build configuration.
+`vue` `vue-router` `vuex` `vuex-router-sync`
+`less` `postcss`
 
 ## Quick Start
 
@@ -41,7 +41,7 @@ my-app
     ├── index.js
     └── index.less
 ```
-### Configure  `homepage` | `buildPath` | `proxy` | `alias` | `externals` | `port` | `devtool` | `gzip` | `analysis`
+### Configure  `homepage` | `buildPath` | `proxy` | `alias` | `externals` | `port` | `devtool` | `gzip` | `analysis` | `srchash`
 ##### in package.json:
 ```json
 {
@@ -55,6 +55,7 @@ my-app
     }
   },
   "WEBPACK_CONFIG": {
+    "srchash": false,
     "gzip": false,
     "analysis": false,
     "alias": {
@@ -82,7 +83,7 @@ my-app
 }
 ```
 
-## Included modules 
+## Included modules
 ```sh
 vue
 vuex
@@ -172,7 +173,7 @@ module.exports = {
     '>1%',
     'last 4 versions',
     'Firefox ESR',
-    'not ie < 9', 
+    'not ie < 9',
     ],
   }),
 ]

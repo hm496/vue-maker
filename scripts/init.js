@@ -79,6 +79,7 @@ function initFn (appPath,
     port: 3000,
   };
   appPackage.WEBPACK_CONFIG = {
+    srcHash: false,
     gzip: false,
     analysis: false,
     alias: {
