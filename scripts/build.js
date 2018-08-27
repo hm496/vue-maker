@@ -68,7 +68,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 if (WEBPACK_CONFIG.srchash) {
   getSrcHash().then(nextStep).catch(function (err) {
     console.log('Public files are already up-to-date');
-    process.exit(1);
+		process.exit(0);
   });
 } else {
   nextStep();
