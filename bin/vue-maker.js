@@ -21,6 +21,10 @@ if (args.includes("--sourcemap")) {
   process.env.GENERATE_SOURCEMAP = JSON.stringify(true)
 }
 
+if (args.includes("--ignore-srchash")) {
+  process.env.IGNORE_SRCHASH = JSON.stringify(true)
+}
+
 switch (script) {
   case 'init':
   case 'build':

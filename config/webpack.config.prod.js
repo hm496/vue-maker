@@ -22,6 +22,11 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const vueLoaderConfig = require('./vueLoaderConfig');
+const _ = require('lodash');
+// HappyPack
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -60,6 +65,8 @@ const fs = require('fs');
 const appDirectory = fs.realpathSync(process.cwd());
 // webpack config
 const WEBPACK_CONFIG = require(paths.appPackageJson).WEBPACK_CONFIG || {};
+const WEBPACK_CONFIG_PROD = require(paths.appPackageJson).WEBPACK_CONFIG_PROD || {};
+_.merge(WEBPACK_CONFIG, WEBPACK_CONFIG_PROD);
 // externals
 const EXTERNALS = WEBPACK_CONFIG.externals || {};
 // alias
@@ -176,13 +183,17 @@ module.exports = {
               /node_modules/.test(file) &&
               !/\.vue\.js/.test(file)
             ),
-            loader: require.resolve('babel-loader'),
+            // loader: require.resolve('babel-loader'),
+            // options: {
+            //   // @remove-on-eject-begin
+            //   babelrc: false,
+            //   presets: [require.resolve('./vueBabelPreset.js')],
+            //   // @remove-on-eject-end
+            //   compact: true,
+            // },
+            loader: require.resolve('happypack/loader'),
             options: {
-              // @remove-on-eject-begin
-              babelrc: false,
-              presets: [require.resolve('./vueBabelPreset.js')],
-              // @remove-on-eject-end
-              compact: true,
+              id: "happyBabel",
             },
           },
           // The notation here is somewhat confusing.
@@ -330,6 +341,23 @@ module.exports = {
     ],
   },
   plugins: [
+    // happypack
+    new HappyPack({
+      id: 'happyBabel',
+      threadPool: happyThreadPool,
+      loaders: [
+        {
+          loader: require.resolve('babel-loader'),
+          options: {
+            // @remove-on-eject-begin
+            babelrc: false,
+            presets: [require.resolve('./vueBabelPreset.js')],
+            // @remove-on-eject-end
+            compact: true,
+          },
+        }
+      ],
+    }),
     // make sure to include the plugin!
     new VueLoaderPlugin(),
     // Makes some environment variables available in index.html.

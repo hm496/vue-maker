@@ -22,6 +22,10 @@ const paths = require('./paths');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const vueLoaderConfig = require('./vueLoaderConfig');
+// HappyPack
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -171,20 +175,24 @@ module.exports = {
               /node_modules/.test(file) &&
               !/\.vue\.js/.test(file)
             ),
-            loader: require.resolve('babel-loader'),
+            // loader: require.resolve('babel-loader'),
+            // options: {
+            //   // @remove-on-eject-begin
+            //   babelrc: false,
+            //   presets: [require.resolve('./vueBabelPreset.js')],
+            //   // @remove-on-eject-end
+            //   // This is a feature of `babel-loader` for webpack (not Babel itself).
+            //   // It enables caching results in ./node_modules/.cache/babel-loader/
+            //   // directory for faster rebuilds.
+            //   /*
+            //   =========================
+            //   cacheDirectory: true,
+            //   =========================
+            //   */
+            // },
+            loader: require.resolve('happypack/loader'),
             options: {
-              // @remove-on-eject-begin
-              babelrc: false,
-              presets: [require.resolve('./vueBabelPreset.js')],
-              // @remove-on-eject-end
-              // This is a feature of `babel-loader` for webpack (not Babel itself).
-              // It enables caching results in ./node_modules/.cache/babel-loader/
-              // directory for faster rebuilds.
-              /*
-              =========================
-              cacheDirectory: true,
-              =========================
-              */
+              id: "happyBabel",
             },
           },
           // less
@@ -305,6 +313,26 @@ module.exports = {
     ],
   },
   plugins: [
+    // happypack
+    new HappyPack({
+      id: 'happyBabel',
+      threadPool: happyThreadPool,
+      loaders: [
+        {
+          loader: require.resolve('babel-loader'),
+          options: {
+            // @remove-on-eject-begin
+            babelrc: false,
+            presets: [require.resolve('./vueBabelPreset.js')],
+            // @remove-on-eject-end
+            // This is a feature of `babel-loader` for webpack (not Babel itself).
+            // It enables caching results in ./node_modules/.cache/babel-loader/
+            // directory for faster rebuilds.
+            cacheDirectory: WEBPACK_CONFIG.BabelCache,
+          },
+        }
+      ],
+    }),
     // make sure to include the plugin!
     new VueLoaderPlugin(),
     // Makes some environment variables available in index.html.

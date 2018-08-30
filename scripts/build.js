@@ -38,6 +38,7 @@ const paths = require('../config/paths');
 const appDirectory = fs.realpathSync(process.cwd());
 const getFilesHash = require("./utils/getFilesHash");
 const WEBPACK_CONFIG = require(paths.appPackageJson).WEBPACK_CONFIG || {};
+const isIgnoreSrchash = process.env.IGNORE_SRCHASH === 'true';
 
 let newSrcHash = null;
 let oldSrcHash = null;
@@ -53,7 +54,7 @@ function getSrcHash () {
       oldSrcHash = oldSrcHash.toString("utf8");
     } catch (e) {
     }
-    if (oldSrcHash && oldSrcHash === hash) {
+    if (!isIgnoreSrchash && oldSrcHash && oldSrcHash === hash) {
       return Promise.reject(hash);
     }
     return hash;

@@ -34,12 +34,24 @@ function ensureSlash (path, needsSlash) {
 const getPublicUrl = appPackageJson => {
   let publicUrl = envPublicUrl || require(appPackageJson).homepage;
   publicUrl = publicUrl.replace(/{{dirname}}/g, appDirname);
+  publicUrl = publicUrl.replace(/{{(\w+)}}/g, function ($0, $1, $2) {
+    if (process.env[$1]) {
+      return process.env[$1];
+    }
+    return $0;
+  });
   return publicUrl;
 };
 
 const getOutputUrl = appPackageJson => {
   let outputUrl = require(appPackageJson).buildPath || "build";
   outputUrl = outputUrl.replace(/{{dirname}}/g, appDirname);
+  outputUrl = outputUrl.replace(/{{(\w+)}}/g, function ($0, $1, $2) {
+    if (process.env[$1]) {
+      return process.env[$1];
+    }
+    return $0;
+  });
   return outputUrl;
 };
 
@@ -51,8 +63,7 @@ const getOutputUrl = appPackageJson => {
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 function getServedPath (appPackageJson) {
   const publicUrl = getPublicUrl(appPackageJson);
-  const servedUrl =
-    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
+  const servedUrl = (publicUrl ? url.parse(publicUrl).pathname : '/');
   return ensureSlash(servedUrl, true);
 }
 
