@@ -4,7 +4,7 @@ import './index.less'
 // import router from './router'
 // import store from './store'
 import AlloyFinger from 'alloyfinger'
-import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
+import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue.js'
 
 Vue.prototype.$t = val => val;
 Vue.use(AlloyFingerPlugin, {
